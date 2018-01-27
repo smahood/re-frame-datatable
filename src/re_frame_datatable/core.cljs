@@ -102,7 +102,7 @@
                   options)
         (assoc-in (state-db-path db-id)
                   {::pagination  (merge {::per-page default-per-page
-                                         ::cur-page 0}
+                                         ::cur-page (or (get-in options [::pagination ::cur-page]) 0)}
                                         (select-keys (::pagination options) [::per-page ::enabled?]))
                    ::total-items (count @(re-frame/subscribe data-sub))
                    ::selection   (merge {::selected-indexes (if (get-in options [::selection ::enabled?])
